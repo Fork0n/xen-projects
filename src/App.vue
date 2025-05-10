@@ -11,7 +11,7 @@ import { RouterView, RouterLink } from 'vue-router'
         <RouterLink to="/sponsor" class="nav-btn" active-class="active">Sponsor</RouterLink>
       </nav>
       <div class="header-content">
-        <img src="./assets/logo.svg" alt="Xen Projects Logo" class="logo" />
+        <img src="./assets/x-logo.svg" alt="Xen Projects Logo" class="logo" />
         <div>
           <h1 class="title">xen-projects</h1>
           <p class="subtitle">Innovate, Collaborate, Build the Future</p>
