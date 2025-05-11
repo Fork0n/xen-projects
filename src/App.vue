@@ -1,20 +1,27 @@
 <script setup>
 import { RouterView, RouterLink } from 'vue-router'
+const userProfileImage = "https://picsum.photos/40/40"
 </script>
 
 <template>
   <div class="landing-aspect">
     <header class="gradient-header">
       <nav class="navbar">
-        <RouterLink to="/" class="nav-btn" exact-active-class="active">Home</RouterLink>
-        <RouterLink to="/projects" class="nav-btn" active-class="active">Projects</RouterLink>
-        <RouterLink to="/sponsor" class="nav-btn" active-class="active">Sponsor</RouterLink>
+        <div class="nav-links">
+          <RouterLink to="/" class="nav-btn" exact-active-class="active">Home</RouterLink>
+          <RouterLink to="/projects" class="nav-btn" active-class="active">Projects</RouterLink>
+          <RouterLink to="/sponsor" class="nav-btn" active-class="active">Sponsor</RouterLink>
+        </div>
+        <RouterLink to="/account" class="profile-btn">
+          <img :src="userProfileImage" alt="User Profile" class="profile-image" />
+        </RouterLink>
+
       </nav>
       <div class="header-content">
         <img src="./assets/x-logo.svg" alt="Xen Projects Logo" class="logo" />
         <div>
           <h1 class="title">xen-projects</h1>
-          <p class="subtitle">Innovate, Collaborate, Build the Future</p>
+          <p class="subtitle">Not following the system</p>
         </div>
       </div>
     </header>
@@ -81,11 +88,15 @@ html, body {
 
 .navbar {
   display: flex;
-  justify-content: center;
-  gap: 10px;
-  padding: 0 40px 16px 40px;
+  justify-content: space-between; /* Change from center to space-between */
+  align-items: center;
+  padding: 0 24px 16px 24px;
   border-radius: 22px 22px 0 0;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
+
 
 .nav-btn {
   color: #f3ebff;
@@ -101,6 +112,40 @@ html, body {
   outline: none;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Optional: adds a slight shadow */
 }
+
+/* Add a container for the navigation links */
+.nav-links {
+  display: flex;
+  gap: 10px;
+}
+
+/* Profile button styles */
+.profile-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: rgba(35, 33, 95, 0.28);
+  border: 2px solid rgba(138, 63, 252, 0.5);
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+}
+
+.profile-btn:hover {
+  transform: scale(1.05);
+  border-color: #8a3ffc;
+  box-shadow: 0 3px 15px rgba(138, 63, 252, 0.4);
+}
+
+.profile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 
 .nav-btn.active,
 .nav-btn.router-link-active {
@@ -166,5 +211,13 @@ main {
   .navbar {
     padding: 0 10px 16px 10px;
   }
+  .nav-links {
+    gap: 5px;
+  }
+  .nav-btn {
+    padding: 6px 14px;
+    font-size: 0.95rem;
+  }
+
 }
 </style>
