@@ -24,10 +24,38 @@ import { RouterView, RouterLink } from 'vue-router'
   </div>
 </template>
 
+<style>
+/* Global styles to fix white border issues */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  background: #181c26;
+}
+
+#app {
+  font-family: Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #fafaff;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+}
+</style>
+
 <style scoped>
 .landing-aspect {
   min-height: 100vh;
-  width: 100vw;
+  width: 100%; /* Changed from 100vw to 100% */
   background: #181c26;
   display: flex;
   flex-direction: column;
@@ -62,24 +90,33 @@ import { RouterView, RouterLink } from 'vue-router'
 .nav-btn {
   color: #f3ebff;
   background: rgba(35,33,95,0.28);
-  border-radius: 8px 8px 0 0;
+  border-radius: 12px; /* Increased roundness from 8px 8px 0 0 */
   padding: 8px 22px 6px 22px;
   font-weight: 600;
   text-decoration: none;
   letter-spacing: 1.5px;
   font-size: 1.1rem;
-  transition: background 0.16s, color 0.17s;
-  border: none;
+  transition: background 0.16s, color 0.17s, border-color 0.2s; /* Added border-color transition */
+  border: 1px solid rgba(138, 63, 252, 0.4); /* Added a subtle purple border */
   outline: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Optional: adds a slight shadow */
 }
+
 .nav-btn.active,
 .nav-btn.router-link-active {
   background: #4424a7;
   color: #fff;
+  border-color: #8a3ffc; /* Brighter border for active state */
+  box-shadow: 0 2px 12px rgba(138, 63, 252, 0.3); /* Enhanced shadow for active state */
+}
+
+/* Optional: add a hover effect */
+.nav-btn:hover:not(.active):not(.router-link-active) {
+  background: rgba(35,33,95,0.5);
+  border-color: rgba(138, 63, 252, 0.7);
 }
 
 .header-content {
-  font-family: "Arial Black";
   display: flex;
   align-items: center;
   justify-content: center;
