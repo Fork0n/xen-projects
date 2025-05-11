@@ -1,0 +1,54 @@
+name: Deploy Vue & Jekyll
+
+on:
+  push:
+    branches: ["master"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build_vue:
+    runs-on: ubuntu-latest
+    name: Build Vue
+    steps:
+      - uses: actions/checkout@v2
+      - id: Build-Vue
+        uses: xRealNeon/VuePagesAction@1.0.1
+        with:
+          username: 'Fork0n'
+          reponame: 'xen-projects'
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+  build_jekyll:
+    runs-on: ubuntu-latest
+    name: Build Jekyll
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Build with Jekyll
+        uses: actions/jekyll-build-pages@v1
+        with:
+          source: ./
+          destination: ./_site
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build_jekyll
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
